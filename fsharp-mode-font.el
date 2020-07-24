@@ -57,6 +57,11 @@
   "Face for errors"
   :group 'fsharp-ui)
 
+(defface fsharp-ui-double-backtick-identifier
+  '((t (:inherit font-lock-variable-name-face :background "gray30")))
+  "Face for double-backtick identifier"
+  :group 'fsharp-ui)
+
 (defmacro def-fsharp-compiled-var (sym init &optional docstring)
   "Defines a SYMBOL as a constant inside an eval-and-compile form
 with initial value INITVALUE and optional DOCSTRING."
@@ -178,6 +183,10 @@ with initial value INITVALUE and optional DOCSTRING."
   "\\s-+\\(|\\)[A-Za-z0-9_' ]"
   "Match literal | in contexts like match and type declarations.")
 
+(def-fsharp-compiled-var fsharp-double-backtick-regexp
+  "``\\([^`]\\|`[^`]\\)+``"
+  "Match double backtick identifiers.")
+
 (defvar fsharp-imenu-generic-expression
   `((nil                 ,(concat "^\\s-*" fsharp-function-def-regexp) 1)
     (nil                 ,(concat "^\\s-*" fsharp-pattern-function-regexp) 1)
@@ -280,7 +289,8 @@ with initial value INITVALUE and optional DOCSTRING."
 
 (defconst fsharp-font-lock-keywords
   (eval-when-compile
-    `((,fsharp-ui-word-list-regexp 0 font-lock-keyword-face)
+    `((,fsharp-double-backtick-regexp . 'fsharp-ui-double-backtick-identifier)
+      (,fsharp-ui-word-list-regexp 0 font-lock-keyword-face)
       ;; shebang
       (,fsharp-shebang-regexp
        (1 font-lock-comment-face)
