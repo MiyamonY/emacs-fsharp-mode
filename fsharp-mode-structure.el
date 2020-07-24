@@ -1779,7 +1779,7 @@ pleasant."
 
 (defun fsharp-smie-rules (kind token)
   (pcase (cons kind token)
-    (`(:elem . basic) fsharp-indent-offset)
+    (`(:elem . basic) (current-indentation))
     (`(:after . "do") fsharp-indent-offset)
     (`(:after . "then") fsharp-indent-offset)
     (`(:after . "else") fsharp-indent-offset)
