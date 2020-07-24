@@ -1784,7 +1784,7 @@ pleasant."
     (`(:after . "then") fsharp-indent-offset)
     (`(:after . "else") fsharp-indent-offset)
     (`(:after . "try") fsharp-indent-offset)
-    (`(:after . "with") fsharp-indent-offset)
+    (`(:after . "with") 0)
     (`(:after . "finally") fsharp-indent-offset)
     (`(:after . "in") 0)
     (`(:after . ,(or `"[" `"]" `"[|" `"|]")) fsharp-indent-offset)
